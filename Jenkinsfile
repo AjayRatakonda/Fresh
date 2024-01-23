@@ -2,19 +2,19 @@ pipeline {
     agent any
 
     stages {
-        stage('code clone') {
+        stage('Clone code') {
             steps {
                 git 'https://github.com/AjayRatakonda/Fresh.git'
             }
         }
-        stage('build code') {
+        stage('code build') {
             steps {
                 sh 'mvn clean install'
             }
         }
         stage('deploy code') {
             steps {
-                deploy adapters: [tomcat9(credentialsId: 'c05d0889-22fb-44a3-a32f-9fa6f24588a6', path: '', url: 'http://13.126.156.250:8082/')], contextPath: 'NTRamaRao.war', war: '**/*.war'
+                deploy adapters: [tomcat9(credentialsId: '3f9256c4-638a-4d13-a49a-fe414491d570', path: '', url: 'http://13.126.156.250:8082/')], contextPath: 'NTRamaRao', war: '**/*.war'    
             }
         }    
     }
